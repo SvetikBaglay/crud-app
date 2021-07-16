@@ -25,6 +25,7 @@ export class TemplatesComponent implements OnInit {
     this.disabled = true;
   }
 
+
   ngOnInit(): void {
     this.owners = this.icarOwnersService.getOwners()
   }

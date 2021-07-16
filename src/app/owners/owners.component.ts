@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
- import { ICarOwnersService } from '../icarowners.service';
+import { ICarOwnersService } from '../icarowners.service';
+
 
 @Component({
   selector: 'app-owners',

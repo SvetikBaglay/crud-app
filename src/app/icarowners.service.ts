@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+
 
 // export interface ICarOwnersService {
 //   getOwners(): Observable<OwnerEntity[]>;
@@ -37,29 +38,31 @@ export class ICarOwnersService {
 //    return
 //  }
 
-getOwners(): OwnerEntity[] {
-  if (this.owners.length === 0) {
-    this.owners = [
-      {
-        aId: 1,
-        aLastName: "Kokos",
-        aFirstName: "Svetlana",
-        aMiddleName: "Petrovna"
-      },
-      {
-        aId: 2,
-        aLastName: "Bahlay",
-        aFirstName: "Mariya",
-        aMiddleName: "Evgenivna"
-      },
-      {
-        aId: 3,
-        aLastName: "Zoro",
-        aFirstName: "Nika",
-        aMiddleName: "Viktorovna"
-      }
-    ];
+  getOwners(): OwnerEntity[] {
+    if (this.owners.length === 0) {
+      this.owners = [
+        {
+          aId: 1,
+          aLastName: "Kokos",
+          aFirstName: "Svetlana",
+          aMiddleName: "Petrovna"
+        },
+        {
+          aId: 2,
+          aLastName: "Bahlay",
+          aFirstName: "Mariya",
+          aMiddleName: "Evgenivna"
+        },
+        {
+          aId: 3,
+          aLastName: "Zoro",
+          aFirstName: "Nika",
+          aMiddleName: "Viktorovna"
+        }
+      ];
+    }
+    return this.owners
   }
-  return this.owners
 }
-}
+
+
