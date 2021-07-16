@@ -7,7 +7,7 @@
     <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Удалить</button>
   </div>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover" *ngIf="owners">
+    <table class="table table-bordered table-hover" *ngIf="owners$ |async as owners">
       <thead>
         <tr>
           <th>Фамилия</th>

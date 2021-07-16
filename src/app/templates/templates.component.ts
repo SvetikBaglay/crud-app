@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ICarOwnersService } from '../icarowners.service';
 import { OwnerEntity } from '../owner';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,11 +10,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './templates.component.html',
   styleUrls: ['./templates.component.css']
 })
-export class TemplatesComponent implements OnInit, OnDestroy {
+export class TemplatesComponent implements OnInit {
   errorMessage = '';
-  owners: OwnerEntity[] = [];
 
-  sub!: Subscription;
+  owners$: Observable<OwnerEntity[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,15 +32,8 @@ export class TemplatesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.sub = this.icarOwnersService.getOwners()
-      .subscribe(
-        owners => this.owners = owners,
-        error => this.errorMessage = error
-      );
+     this.owners$ =  this.icarOwnersService.getOwners()
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
 
 }
