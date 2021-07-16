@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <h2>Владельци автомобилей</h2>
+  <div class="buttons">
+    <button type="button" class="btn btn-secondary mr-5">Добавить</button>
+    <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Просмотр</button>
+    <button type="button" [disabled]="!disabled" (click)="navigateEditOwner()" class="btn btn-secondary mx-1">Редактировать</button>
+    <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Удалить</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Количество автомобилей</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let owner of owners'>
+          <td (click)="changeEvent($event)"><a [routerLink]="['/owners', owner.aId]"></a>{{owner.aFirstName}}</td>
+          <td>{{owner.aLastName}}</td>
+          <td>{{owner.aMiddleName}}</td>
+          <td>cars</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,51 @@
+<h3>Aвтомобили</h3>
+<form #form="ngForm">
+  <div class="rows">
+    <table class="text-centre">
+      <thead>
+        <tr>
+          <th>Номер</th>
+          <th>Марка</th>
+          <th>Модель</th>
+          <th>Год</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="col-xs-3">
+              <input id="name" type="text" name="name" class="form-control" />
+            </div>
+          </td>
+          <td>
+            <div class="col-xs-3">
+              <input id="name" type="text" name="name" class="form-control" />
+            </div>
+          </td>
+          <td>
+            <div class="col-xs-3">
+              <input id="name" type="text" name="name" class="form-control" />
+            </div>
+          </td>
+          <td>
+            <div class="col-xs-3">
+              <input id="name" type="text" name="name" class="form-control" />
+            </div>
+          </td>
+          <td>
+            <div>
+              <input class="mx-2 px-3 bg-danger" type="button">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary my-4 mx-2">Добавить автомобиль</button>
+    <div class="buttons d-flax">
+      <button type="button" class="btn btn-primary m-2">Сохранить</button>
+      <button type="button" (click)="back()" class="btn btn-secondary mx-2">Назад</button>
+    </div>
+  </div>
+</form>
