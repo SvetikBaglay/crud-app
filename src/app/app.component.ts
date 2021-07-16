@@ -10,11 +10,6 @@ export class AppComponent {
   title = 'crud-app';
 
   constructor() { }
-
-
-
-  ngOnInit() {
-  }
 }
 
 

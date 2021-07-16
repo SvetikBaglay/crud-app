@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AppData } from './app-data';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { OwnersComponent } from './owners/owners.component';
@@ -22,6 +24,7 @@ import { TemplatesComponent } from './templates/templates.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 }),
     RouterModule.forRoot([
       { path: 'templates', component: TemplatesComponent },
       { path: 'owners', component: OwnersComponent },

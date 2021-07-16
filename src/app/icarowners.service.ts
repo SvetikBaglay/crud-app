@@ -1,10 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { OwnerEntity } from "./owner";
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 
 // export interface ICarOwnersService {
-//   getOwners(): Observable<OwnerEntity[]>;
 //   getOwnerById(aId: number): Observable<OwnerEntity>;
 
 //   createOwner(
@@ -18,51 +19,33 @@ import { Observable } from 'rxjs';
 //   deleteOwner(aOwnerId: number): Observable<OwnerEntity[]>;
 //   }
 
-export interface OwnerEntity {
-  aId: number;
-  aLastName: string;
-  aFirstName: string;
-  aMiddleName: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class ICarOwnersService {
-  private owners: OwnerEntity[] = [];
+  private ownersUrl = 'api/owners';
 
- constructor(private http: HttpClient) { }
 
-//  getOwnerById(aId: number): Observable<OwnerEntity>{
-//    return
-//  }
+  constructor(private http: HttpClient) { }
 
-  getOwners(): OwnerEntity[] {
-    if (this.owners.length === 0) {
-      this.owners = [
-        {
-          aId: 1,
-          aLastName: "Kokos",
-          aFirstName: "Svetlana",
-          aMiddleName: "Petrovna"
-        },
-        {
-          aId: 2,
-          aLastName: "Bahlay",
-          aFirstName: "Mariya",
-          aMiddleName: "Evgenivna"
-        },
-        {
-          aId: 3,
-          aLastName: "Zoro",
-          aFirstName: "Nika",
-          aMiddleName: "Viktorovna"
-        }
-      ];
+  getOwners(): Observable<OwnerEntity[]> {
+    return this.http.get<OwnerEntity[]>(this.ownersUrl)
+      .pipe(
+        tap(data => console.log('Owners: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(err: any): Observable<never> {
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
     }
-    return this.owners
+    console.error(err);
+    return throwError(errorMessage);
   }
 }
-
 

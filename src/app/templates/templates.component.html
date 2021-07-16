@@ -7,7 +7,7 @@
     <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Удалить</button>
   </div>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" *ngIf="owners">
       <thead>
         <tr>
           <th>Фамилия</th>
@@ -21,7 +21,7 @@
           <td (click)="changeEvent($event)"><a [routerLink]="['/owners', owner.aId]"></a>{{owner.aFirstName}}</td>
           <td>{{owner.aLastName}}</td>
           <td>{{owner.aMiddleName}}</td>
-          <td>cars</td>
+          <td>{{owner.aCars}}</td>
         </tr>
       </tbody>
     </table>
