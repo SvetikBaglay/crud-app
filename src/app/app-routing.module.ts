@@ -5,7 +5,7 @@ import { OwnerComponent } from './owner/owner.component';
 
 const routes: Routes = [
 { path: 'owners', component: OwnersComponent },
-{ path: 'owner', component: OwnerComponent },
+{ path: 'owners/aId', component: OwnerComponent },
 { path: '**', redirectTo: 'owners', pathMatch: 'full' },
 ]
 @NgModule({

@@ -20,7 +20,7 @@ export class OwnersComponent implements OnInit {
   disabled: boolean = false;
 
   navigateEditOwner = () => {
-    this.router.navigate(['/owners'])
+    this.router.navigate(['/owners/aId'])
   }
 
   changeEvent(e: MouseEvent) {
@@ -29,7 +29,6 @@ export class OwnersComponent implements OnInit {
 
    ngOnInit(): void  {
      this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
-    console.log("owners: ", this.owners)
   }
 
 
