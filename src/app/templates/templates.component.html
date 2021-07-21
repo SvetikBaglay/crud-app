@@ -7,7 +7,7 @@
     <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Удалить</button>
   </div>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover" *ngIf="owners$ |async as owners">
+    <table class="table table-bordered table-hover" *ngIf="owners">
       <thead>
         <tr>
           <th>Фамилия</th>
@@ -17,8 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let owner of owners'>
-          <td (click)="changeEvent($event)"><a [routerLink]="['/owners', owner.aId]"></a>{{owner.aFirstName}}</td>
+        <tr *ngFor="let owner of owners">
+          <td (click)="changeEvent($event)">
+            <a routerLink="/owners/{{owner.aId}}">{{owner.aFirstName}}</a>
+          </td>
           <td>{{owner.aLastName}}</td>
           <td>{{owner.aMiddleName}}</td>
           <td>{{owner.aCars}}</td>
@@ -27,4 +29,5 @@
     </table>
   </div>
 </div>
+<!-- <app-owners></app-owners> -->
 

@@ -1,13 +1,13 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { OwnerEntity } from './owner';
-import { OwnerData } from './owner-data';
+// import { InMemoryDbService } from 'angular-in-memory-web-api';
+// import { OwnerEntity } from './owner';
+// import { OwnerData } from './owner-data';
 
-export class AppData implements InMemoryDbService {
+// export class AppData implements InMemoryDbService {
 
-  createDb(): { owners: OwnerEntity[] } {
-    const owners = OwnerData.owners;
-    return { owners}
-  }
+//   createDb(): { owners: OwnerEntity[] } {
+//     const owners = OwnerData.owners;
+//     return { owners}
+//   }
 
 
   // createDb(): { products: OwnerEntity[], productCategories: ProductCategory[], suppliers: Supplier[]} {
@@ -15,4 +15,4 @@ export class AppData implements InMemoryDbService {
     // const productCategories = ProductCategoryData.categories;
     // const suppliers = SupplierData.suppliers;
     // return { products, productCategories, suppliers };
-  }
+  // }
