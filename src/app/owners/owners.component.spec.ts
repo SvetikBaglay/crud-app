@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OwnersComponent } from './owners.component';
 
-describe('OwnersComponent', () => {
+describe('TemplatesComponent', () => {
   let component: OwnersComponent;
   let fixture: ComponentFixture<OwnersComponent>;
 

@@ -4,17 +4,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OwnersComponent } from './owners/owners.component';
+import { OwnerComponent } from './owner/owner.component';
 import { FormsModule } from '@angular/forms';
-import { TemplatesComponent } from './templates/templates.component';
+import { OwnersComponent } from './owners/owners.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OwnersComponent,
-    TemplatesComponent
+    OwnerComponent,
+    OwnersComponent
   ],
   imports: [
     BrowserModule,
@@ -24,11 +24,6 @@ import { InMemoryDataService }  from './in-memory-data.service';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
-    // RouterModule.forRoot([
-      // { path: 'templates', component: TemplatesComponent },
-      // { path: 'owners', component: OwnersComponent },
-      // { path: '**', redirectTo: 'templates', pathMatch: 'full'},
-    // ])
   ],
   providers: [],
   bootstrap: [AppComponent]

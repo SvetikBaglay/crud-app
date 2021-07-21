@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ICarOwnersService } from '../icarowners.service';
 import { OwnerEntity } from '../owner';
 
@@ -10,31 +9,30 @@ import { OwnerEntity } from '../owner';
   templateUrl: './owners.component.html',
   styleUrls: ['./owners.component.css']
 })
-
 export class OwnersComponent implements OnInit {
-  owners: OwnerEntity[];
-
+  owners: OwnerEntity[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private icarOwnersService: ICarOwnersService
-    ) { }
+    private icarOwnersService: ICarOwnersService,
+    private router: Router) { }
 
-  getItems() {
-    this.icarOwnersService.getOwners()
-      .subscribe(owners => this.owners = owners);
+  disabled: boolean = false;
 
+  navigateEditOwner = () => {
+    this.router.navigate(['/owners'])
   }
 
-  back = () => {
-    this.router.navigate(['/templates'])
+  changeEvent(e: MouseEvent) {
+    this.disabled = true;
   }
 
-  ngOnInit() {
-    console.log('on init');
-
-    this.getItems()
+   ngOnInit(): void  {
+     this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
+    console.log("owners: ", this.owners)
   }
+
 
 }
+
+

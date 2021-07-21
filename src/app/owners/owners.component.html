@@ -1,71 +1,32 @@
-<form #form="ngForm" class="form-horizontal">
-  <div class="form-group row p-2">
-    <label for="aLastName" class="col-sm-1 col-form-label">Фамилия</label>
-    <div class="col-sm-2">
-      <input id="aLastName" type="text" name="name" class="form-control mx-sm-3" />
-    </div>
+<div class="container-fluid">
+  <h2>Владельци автомобилей</h2>
+  <div class="buttons">
+    <button type="button" class="btn btn-secondary mr-5">Добавить</button>
+    <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Просмотр</button>
+    <button type="button" [disabled]="!disabled" (click)="navigateEditOwner()" class="btn btn-secondary mx-1">Редактировать</button>
+    <button type="button" [disabled]="!disabled" class="btn btn-secondary mx-1">Удалить</button>
   </div>
-  <div class="form-group row p-2">
-    <label for="aFirstName" class="col-sm-1 col-form-label">Имя</label>
-    <div class="col-sm-2">
-      <input id="aFirstName" type="text" name="name" class="form-control mx-sm-3" />
-    </div>
-  </div>
-  <div class="form-group row p-2">
-    <label for="aMiddleName" class="col-sm-1 col-form-label">Отчество</label>
-    <div class="col-sm-2">
-      <input id="aMiddleName" type="text" name="name" class="form-control mx-sm-3" />
-    </div>
-  </div>
-  <h3>Aвтомобили</h3>
-  <div class="rows">
-    <table class="text-centre">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" *ngIf="owners">
       <thead>
         <tr>
-          <th>Номер</th>
-          <th>Марка</th>
-          <th>Модель</th>
-          <th>Год</th>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Количество автомобилей</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
-            </div>
+        <tr *ngFor="let owner of owners">
+          <td (click)="changeEvent($event)">
+            <a routerLink="/owners/{{owner.aId}}">{{owner.aFirstName}}</a>
           </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div>
-              <input class="mx-2 px-3 bg-danger" type="button">
-            </div>
-          </td>
+          <td>{{owner.aLastName}}</td>
+          <td>{{owner.aMiddleName}}</td>
+          <td>{{owner.aCars}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div>
-    <button type="button" class="btn btn-primary my-4 mx-2">Добавить автомобиль</button>
-    <div class="buttons d-flax">
-      <button type="button" class="btn btn-primary m-2">Сохранить</button>
-      <button type="button" (click)="back()" class="btn btn-secondary mx-2">Назад</button>
-    </div>
-  </div>
-</form>
-
+</div>
 
