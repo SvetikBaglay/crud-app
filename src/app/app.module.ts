@@ -8,7 +8,8 @@ import { OwnerComponent } from './owner/owner.component';
 import { FormsModule } from '@angular/forms';
 import { OwnersComponent } from './owners/owners.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
