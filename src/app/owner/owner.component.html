@@ -33,22 +33,22 @@
         <tr>
           <td>
             <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
+              <input id="number" type="text" name="number" class="form-control" />
             </div>
           </td>
           <td>
             <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
+              <input id="manufacturer" type="text" name="manufacturer" class="form-control" />
             </div>
           </td>
           <td>
             <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
+              <input id="model" type="text" name="model" class="form-control" />
             </div>
           </td>
           <td>
             <div class="col-xs-3">
-              <input id="name" type="text" name="name" class="form-control" />
+              <input id="year" type="text" name="year" class="form-control" />
             </div>
           </td>
           <td>
@@ -66,9 +66,9 @@
     <button type="button" class="btn btn-primary my-4 mx-2">
       <fa-icon [icon]="faPlus"></fa-icon>Добавить автомобиль</button>
     <div class="buttons d-flax">
-      <button type="button" class="btn btn-primary m-2">
+      <button [disabled]="disabled" (click)="save()" type="button" class="btn btn-primary m-2">
         <fa-icon [icon]="faSave"></fa-icon>Сохранить</button>
-      <button type="button" (click)="back()" class="btn btn-secondary mx-2" >
+      <button type="button" (click)="goBack()" class="btn btn-secondary mx-2" >
         <fa-icon [icon]="faArrowCircleLeft"></fa-icon>Назад</button>
     </div>
   </div>

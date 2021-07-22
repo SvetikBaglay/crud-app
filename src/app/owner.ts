@@ -3,5 +3,9 @@ export class OwnerEntity {
   aLastName: string;
   aFirstName: string;
   aMiddleName: string;
-  aCars: number[];
+  aCars: CarEntity[];
+}
+
+export class CarEntity {
+  cars: number
 }

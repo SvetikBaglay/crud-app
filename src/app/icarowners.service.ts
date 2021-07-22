@@ -1,9 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { OwnerEntity } from "./owner";
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +23,10 @@ export class ICarOwnersService {
     return this.http.get<OwnerEntity>(url);
   }
 
+  addOwner(OwnerEntity: OwnerEntity): Observable<OwnerEntity> {
+    return this.http.post<OwnerEntity>(this.ownersUrl, OwnerEntity);
+  }
+
 }
+
 

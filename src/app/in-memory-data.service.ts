@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { OwnerEntity } from "./owner";
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Injectable({
@@ -13,21 +12,21 @@ export class InMemoryDataService implements InMemoryDbService{
         aLastName: "Kokos",
         aFirstName: "Svetlana",
         aMiddleName: "Petrovna",
-        aCars: [1]
+        aCars: []
       },
       {
         id: 2,
         aLastName: "Bahlay",
         aFirstName: "Mariya",
         aMiddleName: "Evgenivna",
-        aCars: [3]
+        aCars: []
       },
       {
         id: 3,
         aLastName: "Zoro",
         aFirstName: "Nika",
         aMiddleName: "Viktorovna",
-        aCars: [2]
+        aCars: []
       }
     ];
     return { owners }

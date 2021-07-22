@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICarOwnersService } from '../icarowners.service';
-import { OwnerEntity } from '../owner';
+import { CarEntity, OwnerEntity } from '../owner';
+import { Location } from '@angular/common';
 import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -13,27 +14,53 @@ import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-
 
 export class OwnerComponent implements OnInit {
   owner: OwnerEntity;
+  aCars: CarEntity[] = [];
   faArrowCircleLeft = faArrowCircleLeft;
   faSave = faSave;
   faTrashAlt = faTrashAlt;
   faPlus = faPlus;
+  owners: OwnerEntity[] = [];
+  disabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private icarOwnersService: ICarOwnersService
+    private icarOwnersService: ICarOwnersService,
+    private location: Location
     ) { }
 
 
-  back = () => {
-    this.router.navigate(['/owners'])
+  goBack(): void  {
+    this.location.back();
+  }
+
+  save(): void{
+    this.icarOwnersService.addOwner(this.owner).subscribe(() => this.goBack());
+  }
+
+  addOwnerItem(
+    id: number,
+    aLastName: string,
+    aFirstName: string,
+    aMiddleName: string,
+    aCars: CarEntity[]
+  ): void {
+    console.log('!aLastName: ', !aLastName);
+    if (!aLastName || !aMiddleName || !aFirstName || !aCars) {
+      this.disabled = true;
+    }
+    this.icarOwnersService.addOwner({ id, aLastName, aFirstName, aMiddleName, aCars } as OwnerEntity)
+      .subscribe(owner => {
+        this.owners.push(owner);
+      })
   }
 
   getOwnerByaIdItem(): void {
     const aId = +this.route.snapshot.params.aId;
     this.icarOwnersService.getOwnerById(aId).subscribe((owner) => {
       this.owner = owner;
-      console.log('owner: ', owner);
+      this.aCars = this.aCars;
+      console.log('aCars: ', this.aCars);
 
     });
   }

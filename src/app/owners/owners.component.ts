@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICarOwnersService } from '../icarowners.service';
-import { OwnerEntity } from '../owner';
+import { CarEntity, OwnerEntity } from '../owner';
 
 
 @Component({
@@ -22,7 +22,6 @@ export class OwnersComponent implements OnInit {
   changeEvent(ownerId: number) {
     this.selectedId = ownerId;
   }
-
    ngOnInit(): void  {
      this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
   }
