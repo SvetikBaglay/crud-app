@@ -11,27 +11,21 @@ import { OwnerEntity } from '../owner';
 })
 export class OwnersComponent implements OnInit {
   owners: OwnerEntity[] = [];
+  selectedId: number | null = null;
 
   constructor(
-    private route: ActivatedRoute,
     private icarOwnersService: ICarOwnersService,
     private router: Router) { }
 
   disabled: boolean = false;
 
-  navigateEditOwner = () => {
-    this.router.navigate(['/owners/aId'])
-  }
-
-  changeEvent(e: MouseEvent) {
-    this.disabled = true;
+  changeEvent(ownerId: number) {
+    this.selectedId = ownerId;
   }
 
    ngOnInit(): void  {
      this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
   }
-
-
 }
 
 

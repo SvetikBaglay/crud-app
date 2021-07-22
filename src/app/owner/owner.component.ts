@@ -11,8 +11,7 @@ import { OwnerEntity } from '../owner';
 })
 
 export class OwnerComponent implements OnInit {
-  owners: OwnerEntity[];
-
+  owner: OwnerEntity;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,20 +19,21 @@ export class OwnerComponent implements OnInit {
     private icarOwnersService: ICarOwnersService
     ) { }
 
-  getItems() {
-    this.icarOwnersService.getOwners()
-      .subscribe(owners => this.owners = owners);
-
-  }
 
   back = () => {
     this.router.navigate(['/owners'])
   }
 
-  ngOnInit() {
-    console.log('on init');
+  getOwnerByaIdItem(): void {
+    const aId = +this.route.snapshot.params.aId;
+    this.icarOwnersService.getOwnerById(aId).subscribe((owner) => {
+      this.owner = owner;
+      console.log('owner: ', owner);
 
-    this.getItems()
+    });
   }
 
+  ngOnInit() {
+    this.getOwnerByaIdItem();
+  }
 }

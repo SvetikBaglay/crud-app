@@ -1,20 +1,21 @@
-<form #form="ngForm" class="form-horizontal">
+<form #form="ngForm" class="form-horizontal" *ngIf="owner">
+
   <div class="form-group row p-2">
     <label for="aLastName" class="col-sm-1 col-form-label">Фамилия</label>
     <div class="col-sm-2">
-      <input id="aLastName" type="text" name="name" class="form-control mx-sm-3"/>
+      <input name="aLastName" id="aLastName" class="form-control mx-sm-3" placeholder="Фамилия" [(ngModel)]="owner.aLastName"/>
     </div>
   </div>
   <div class="form-group row p-2">
     <label for="aFirstName" class="col-sm-1 col-form-label">Имя</label>
     <div class="col-sm-2">
-      <input id="aFirstName" type="text" name="name" class="form-control mx-sm-3" />
+      <input name="aFirstName" id="aFirstName" class="form-control mx-sm-3" placeholder="Имя" [(ngModel)]="owner.aFirstName"/>
     </div>
   </div>
   <div class="form-group row p-2">
     <label for="aMiddleName" class="col-sm-1 col-form-label">Отчество</label>
     <div class="col-sm-2">
-      <input id="aMiddleName" type="text" name="name" class="form-control mx-sm-3" />
+      <input name="aMiddleName" id="aMiddleName" class="form-control mx-sm-3" placeholder="Отчество" [(ngModel)]="owner.aMiddleName"/>
     </div>
   </div>
   <h3>Aвтомобили</h3>

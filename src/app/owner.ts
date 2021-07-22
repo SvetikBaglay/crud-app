@@ -1,5 +1,5 @@
-export interface OwnerEntity {
-  aId: number;
+export class OwnerEntity {
+  id: number;
   aLastName: string;
   aFirstName: string;
   aMiddleName: string;

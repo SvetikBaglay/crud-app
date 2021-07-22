@@ -17,8 +17,12 @@ export class ICarOwnersService {
 
 
   getOwners(): Observable<OwnerEntity[]> {
-    console.log("observable: ", this.getOwners)
-    return this.http.get<OwnerEntity[]>(this.ownersUrl)
+    return this.http.get<OwnerEntity[]>(this.ownersUrl);
+  }
+
+  getOwnerById(aId: number | null): Observable<OwnerEntity> {
+    const url = `${this.ownersUrl}/${aId}`;
+    return this.http.get<OwnerEntity>(url);
   }
 
 }

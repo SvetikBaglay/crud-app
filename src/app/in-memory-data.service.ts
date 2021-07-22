@@ -9,21 +9,21 @@ export class InMemoryDataService implements InMemoryDbService{
   createDb() {
     const owners = [
       {
-        aId: 1,
+        id: 1,
         aLastName: "Kokos",
         aFirstName: "Svetlana",
         aMiddleName: "Petrovna",
         aCars: [1]
       },
       {
-        aId: 2,
+        id: 2,
         aLastName: "Bahlay",
         aFirstName: "Mariya",
         aMiddleName: "Evgenivna",
         aCars: [3]
       },
       {
-        aId: 3,
+        id: 3,
         aLastName: "Zoro",
         aFirstName: "Nika",
         aMiddleName: "Viktorovna",
@@ -32,7 +32,7 @@ export class InMemoryDataService implements InMemoryDbService{
     ];
     return { owners }
   }
-  genaId(owners: OwnerEntity[]): number {
-    return owners.length > 0 ? Math.max(...owners.map(owner => owner.aId)) + 1 : 1;
-  }
+  // genaId(owners: OwnerEntity[]): number {
+  //   return owners.length > 0 ? Math.max(...owners.map(owner => owner.aId)) + 1 : 1;
+  // }
 }
