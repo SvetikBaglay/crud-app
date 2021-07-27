@@ -1,77 +1,57 @@
-<form #form="ngForm" class="form-horizontal" *ngIf="owner">
+<form [formGroup]="ownerForm" [routerLink]="['/owners', ownerForm.value.id]"(ngSubmit)="onSubmit()">
 
-  <div class="form-group row p-2">
-    <label for="aLastName" class="col-sm-1 col-form-label">Фамилия</label>
-    <div class="col-sm-2">
-      <input name="aLastName" id="aLastName" class="form-control mx-sm-3" placeholder="Фамилия" [(ngModel)]="owner.aLastName"/>
-    </div>
-  </div>
-  <div class="form-group row p-2">
-    <label for="aFirstName" class="col-sm-1 col-form-label">Имя</label>
-    <div class="col-sm-2">
-      <input name="aFirstName" id="aFirstName" class="form-control mx-sm-3" placeholder="Имя" [(ngModel)]="owner.aFirstName"/>
-    </div>
-  </div>
-  <div class="form-group row p-2">
-    <label for="aMiddleName" class="col-sm-1 col-form-label">Отчество</label>
-    <div class="col-sm-2">
-      <input name="aMiddleName" id="aMiddleName" class="form-control mx-sm-3" placeholder="Отчество" [(ngModel)]="owner.aMiddleName"/>
-    </div>
-  </div>
-  <h3>Aвтомобили</h3>
-  <div class="rows">
-    <table class="text-centre">
-      <thead>
-        <tr>
-          <th>Номер</th>
-          <th>Марка</th>
-          <th>Модель</th>
-          <th>Год</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="col-xs-3">
-              <input id="number" type="text" name="number" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="manufacturer" type="text" name="manufacturer" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="model" type="text" name="model" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div class="col-xs-3">
-              <input id="year" type="text" name="year" class="form-control" />
-            </div>
-          </td>
-          <td>
-            <div>
-              <button>
-                <fa-icon [icon]="faTrashAlt"></fa-icon>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <button type="button" class="btn btn-primary my-4 mx-2">
-      <fa-icon [icon]="faPlus"></fa-icon>Добавить автомобиль</button>
-    <div class="buttons d-flax">
-      <button [disabled]="disabled" (click)="save()" type="button" class="btn btn-primary m-2">
-        <fa-icon [icon]="faSave"></fa-icon>Сохранить</button>
-      <button type="button" (click)="goBack()" class="btn btn-secondary mx-2" >
-        <fa-icon [icon]="faArrowCircleLeft"></fa-icon>Назад</button>
-    </div>
-  </div>
-</form>
+    <div class="form-group p-2">
+
+      <label for="lastName" class="col-sm-1 col-form-label">Фамилия</label>
+      <input id="lastName" formControlName="lastName" type="text"class="form-control mx-sm-3">
 
 
+      <label for="firstName" class="col-sm-1 col-form-label">Имя</label>
+      <input id="firstName" formControlName="firstName" type="text" class="form-control mx-sm-3">
+
+
+      <label for="middleName" class="col-sm-1 col-form-label">Отчество</label>
+      <input id="middleName" formControlName="middleName" type="text" class="form-control mx-sm-3">
+
+    </div>
+
+    <div formArrayName="cars">
+      <h3>Aвтомобили</h3>
+      <div *ngFor="let car of cars.controls; let i=index">
+        <div [formGroupName]="i">
+          <label for="number">Номер</label>
+          <input id="number" formControlName="number"  type="text" >
+
+          <label for="manufacturer">Марка</label>
+          <input id="manufacturer" formControlName="manufacturer"  type="text" >
+
+          <label for="model">Модель</label>
+          <input id="model" formControlName="model" type="text" >
+
+          <label for="year">Год</label>
+          <input id="year" formControlName="year" type="text" >
+
+          <button class="btn btn-danger" (click)="removeCar(i)">
+            <fa-icon style="color: #fff; font-size: 25px;" [icon]="faTrashAlt"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+
+
+      <button (click)="addCar()" type="submit" class="btn btn-primary my-4 mx-2">
+        <fa-icon [icon]="faPlus"></fa-icon>Добавить автомобиль
+      </button>
+
+      <button [disabled]="!ownerForm.valid" type="submit" class="btn btn-primary m-2">
+        <fa-icon [icon]="faSave"></fa-icon>Сохранить
+      </button>
+    </div>
+
+    <div>
+        <button type="button" (click)="goBack()" class="btn btn-secondary mx-2" >
+          <fa-icon [icon]="faArrowCircleLeft"></fa-icon>Назад
+        </button>
+    </div>
+  </form>

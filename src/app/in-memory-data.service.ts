@@ -9,24 +9,24 @@ export class InMemoryDataService implements InMemoryDbService{
     const owners = [
       {
         id: 1,
-        aLastName: "Kokos",
-        aFirstName: "Svetlana",
-        aMiddleName: "Petrovna",
-        aCars: []
+        lastName: "Kokos",
+        firstName: "Svetlana",
+        middleName: "Petrovna",
+        cars: []
       },
       {
         id: 2,
-        aLastName: "Bahlay",
-        aFirstName: "Mariya",
-        aMiddleName: "Evgenivna",
-        aCars: []
+        lastName: "Bahlay",
+        firstName: "Mariya",
+        middleName: "Evgenivna",
+        cars: []
       },
       {
         id: 3,
-        aLastName: "Zoro",
-        aFirstName: "Nika",
-        aMiddleName: "Viktorovna",
-        aCars: []
+        lastName: "Zoro",
+        firstName: "Nika",
+        middleName: "Viktorovna",
+        cars: []
       }
     ];
     return { owners }

@@ -1,11 +1,14 @@
 export class OwnerEntity {
   id: number;
-  aLastName: string;
-  aFirstName: string;
-  aMiddleName: string;
-  aCars: CarEntity[];
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  cars: CarEntity[];
 }
 
 export class CarEntity {
-  cars: number
+  number: string;
+  manufacturer: string;
+  model: string;
+  year: number
 }

@@ -19,11 +19,11 @@
       <tbody>
         <tr *ngFor="let owner of owners">
           <td (click)="changeEvent(owner.id)">
-            <a [routerLink]="['/owners', owner.id]">{{owner.aFirstName}}</a>
+            <a [routerLink]="['/owners', owner.id]">{{owner.lastName}}</a>
           </td>
-          <td>{{owner.aLastName}}</td>
-          <td>{{owner.aMiddleName}}</td>
-          <td>{{owner.aCars}}</td>
+          <td>{{owner.firstName}}</td>
+          <td>{{owner.middleName}}</td>
+          <td>{{owner.cars}}</td>
         </tr>
       </tbody>
     </table>

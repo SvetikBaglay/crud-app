@@ -6,7 +6,7 @@ import { OwnerComponent } from './owner/owner.component';
 const routes: Routes = [
 { path: '', redirectTo: '/owners', pathMatch: 'full' },
 { path: 'owners', component: OwnersComponent },
-{ path: 'owners/:aId', component: OwnerComponent },
+{ path: 'owners/:id', component: OwnerComponent },
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

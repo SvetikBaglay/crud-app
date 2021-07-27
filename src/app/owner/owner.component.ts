@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICarOwnersService } from '../icarowners.service';
-import { CarEntity, OwnerEntity } from '../owner';
-import { Location } from '@angular/common';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
-
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-owner',
@@ -13,59 +12,71 @@ import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-
 })
 
 export class OwnerComponent implements OnInit {
-  owner: OwnerEntity;
-  aCars: CarEntity[] = [];
+  ownerForm = this.fb.group({
+    id: [''],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    middleName: ['', Validators.required],
+    cars: this.fb.array([
+      this.fb.group({number: ['', Validators.required], manufacturer: ['', Validators.required], model: ['', Validators.required], year: ['', Validators.required]}),
+    ])
+  });
+
   faArrowCircleLeft = faArrowCircleLeft;
   faSave = faSave;
   faTrashAlt = faTrashAlt;
   faPlus = faPlus;
-  owners: OwnerEntity[] = [];
-  disabled: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private icarOwnersService: ICarOwnersService,
-    private location: Location
+    private icarOwnersService: ICarOwnersService
     ) { }
 
-
   goBack(): void  {
-    this.location.back();
+    this.router.navigate(['/owners'])
   }
 
-  save(): void{
-    this.icarOwnersService.addOwner(this.owner).subscribe(() => this.goBack());
+  get cars() {
+    return this.ownerForm.get('cars') as FormArray;
   }
 
-  addOwnerItem(
-    id: number,
-    aLastName: string,
-    aFirstName: string,
-    aMiddleName: string,
-    aCars: CarEntity[]
-  ): void {
-    console.log('!aLastName: ', !aLastName);
-    if (!aLastName || !aMiddleName || !aFirstName || !aCars) {
-      this.disabled = true;
-    }
-    this.icarOwnersService.addOwner({ id, aLastName, aFirstName, aMiddleName, aCars } as OwnerEntity)
-      .subscribe(owner => {
-        this.owners.push(owner);
+  onSubmit() {
+    this.icarOwnersService.editOwner(this.ownerForm.value).subscribe(() => this.goBack());
+  }
+
+  addCar() {
+    this.cars.push(
+      this.fb.group({
+        number: [''],
+        manufacturer: [''],
+        model: [''],
+        year: ['']
       })
+    );
+  };
+
+  removeCar(index: number) {
+    this.cars.removeAt(index);
   }
 
-  getOwnerByaIdItem(): void {
-    const aId = +this.route.snapshot.params.aId;
-    this.icarOwnersService.getOwnerById(aId).subscribe((owner) => {
-      this.owner = owner;
-      this.aCars = this.aCars;
-      console.log('aCars: ', this.aCars);
-
+  getOwnerByIdItem(): void {
+    const id = +this.route.snapshot.params.id;
+    this.icarOwnersService.getOwnerById(id).subscribe((owner) => {
+      this.ownerForm.setValue(
+        {
+          id: owner.id,
+          firstName: owner.firstName,
+          lastName: owner.lastName,
+          middleName: owner.middleName,
+          cars: owner.cars.length ? owner.cars : [{ number: '', manufacturer: '', model: '', year: ''}],
+        }
+      )
     });
   }
 
   ngOnInit() {
-    this.getOwnerByaIdItem();
+    this.getOwnerByIdItem();
   }
 }

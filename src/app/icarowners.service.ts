@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OwnerEntity } from "./owner";
+import { CarEntity, OwnerEntity } from "./owner";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,13 +18,18 @@ export class ICarOwnersService {
     return this.http.get<OwnerEntity[]>(this.ownersUrl);
   }
 
-  getOwnerById(aId: number | null): Observable<OwnerEntity> {
-    const url = `${this.ownersUrl}/${aId}`;
+  getOwnerById(id: number | null): Observable<OwnerEntity> {
+    const url = `${this.ownersUrl}/${id}`;
     return this.http.get<OwnerEntity>(url);
   }
 
-  addOwner(OwnerEntity: OwnerEntity): Observable<OwnerEntity> {
+  addOwner(ownerEntity: OwnerEntity): Observable<OwnerEntity> {
     return this.http.post<OwnerEntity>(this.ownersUrl, OwnerEntity);
+  }
+
+  editOwner(ownerParams: { id: number, lastName: string, firstName: string, middleName: string, cars: CarEntity[] }): Observable<Object> {
+    const url = `${this.ownersUrl}/${ownerParams.id}`;
+    return this.http.put(url, ownerParams);
   }
 
 }
