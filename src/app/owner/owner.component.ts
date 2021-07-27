@@ -4,6 +4,7 @@ import { ICarOwnersService } from '../icarowners.service';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Validators } from '@angular/forms';
+import { CarEntity } from '../owner';
 
 @Component({
   selector: 'app-owner',
@@ -17,9 +18,7 @@ export class OwnerComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     middleName: ['', Validators.required],
-    cars: this.fb.array([
-      this.fb.group({number: ['', Validators.required], manufacturer: ['', Validators.required], model: ['', Validators.required], year: ['', Validators.required]}),
-    ])
+    cars: this.fb.array([])
   });
 
   faArrowCircleLeft = faArrowCircleLeft;
@@ -38,6 +37,14 @@ export class OwnerComponent implements OnInit {
     this.router.navigate(['/owners'])
   }
 
+  newCarGroup(car?: CarEntity) {
+    if (car) {
+      return this.fb.group({ number: car.number, manufacturer: car.manufacturer, model: car.model, year: car.year });
+    }
+
+    return this.fb.group({ number: ['', Validators.required], manufacturer: ['', Validators.required], model: ['', Validators.required], year: ['', Validators.required] });
+  }
+
   get cars() {
     return this.ownerForm.get('cars') as FormArray;
   }
@@ -47,14 +54,7 @@ export class OwnerComponent implements OnInit {
   }
 
   addCar() {
-    this.cars.push(
-      this.fb.group({
-        number: [''],
-        manufacturer: [''],
-        model: [''],
-        year: ['']
-      })
-    );
+    this.cars.push(this.newCarGroup());
   };
 
   removeCar(index: number) {
@@ -64,15 +64,19 @@ export class OwnerComponent implements OnInit {
   getOwnerByIdItem(): void {
     const id = +this.route.snapshot.params.id;
     this.icarOwnersService.getOwnerById(id).subscribe((owner) => {
-      this.ownerForm.setValue(
+      console.log('owner: ', owner);
+
+      this.ownerForm.patchValue(
         {
           id: owner.id,
           firstName: owner.firstName,
           lastName: owner.lastName,
           middleName: owner.middleName,
-          cars: owner.cars.length ? owner.cars : [{ number: '', manufacturer: '', model: '', year: ''}],
         }
       )
+
+      owner.cars.forEach((car) => this.cars.push(this.newCarGroup(car)));
+
     });
   }
 
