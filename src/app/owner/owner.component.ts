@@ -39,11 +39,16 @@ export class OwnerComponent implements OnInit {
 
   newCarGroup(car?: CarEntity) {
     if (car) {
-      return this.fb.group({ number: car.number, manufacturer: car.manufacturer, model: car.model, year: car.year });
+    return this.fb.group({ number: car.number, manufacturer: car.manufacturer, model: car.model, year: car.year });
     }
 
-    return this.fb.group({ number: ['', Validators.required], manufacturer: ['', Validators.required], model: ['', Validators.required], year: ['', Validators.required] });
-  }
+    return this.fb.group({
+    number: ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')],
+    manufacturer: ['', Validators.required],
+    model: ['', Validators.required],
+    year: ['', Validators.required, Validators.pattern('^[0-9]{4}$')]
+      });
+    }
 
   get cars() {
     return this.ownerForm.get('cars') as FormArray;
