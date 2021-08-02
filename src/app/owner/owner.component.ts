@@ -43,9 +43,11 @@ export class OwnerComponent implements OnInit {
     }
 
     return this.fb.group({
-    number: ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')],
+    // number: ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')],
+    number: [''],
     manufacturer: ['', Validators.required],
     model: ['', Validators.required],
+    // year: ['']
     year: ['', Validators.required, Validators.pattern('^[0-9]{4}$')]
       });
     }
@@ -79,13 +81,15 @@ export class OwnerComponent implements OnInit {
           middleName: owner.middleName,
         }
       )
-
       owner.cars.forEach((car) => this.cars.push(this.newCarGroup(car)));
-
     });
   }
 
   ngOnInit() {
+    this.ownerForm = this.fb.group({
+      number: this.fb.control('', Validators.required)
+      // ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')]
+    })
     this.getOwnerByIdItem();
   }
 }
