@@ -20,7 +20,21 @@
       <div *ngFor="let car of cars.controls; let i=index">
         <div [formGroupName]="i">
           <label for="number">Номер</label>
-          <input id="number" formControlName="number"  type="text" >
+
+          <input id="number" formControlName="number" type="text" class="form-control" [class.is-invalid]="car.get('number')?.invalid" requared >
+
+          <!-- <div *ngIf="ownerForm.controls['number'].invalid && (ownerForm.controls['number'].dirty || ownerForm.controls['number'].touched)" class="alert alert-danger">
+              Номер обязателень к заполнению.
+
+            <div *ngIf="ownerForm.controls['number'].errors?.requared">
+              Номер обязателень к заполнению.
+            </div>
+
+            <div *ngIf="ownerForm.controls['number'].errors?.pattern">
+              Номер должен состоять из 2-х букв 4-х цифр и 2-х букв.
+            </div>
+
+          </div> -->
 
           <label for="manufacturer">Марка</label>
           <input id="manufacturer" formControlName="manufacturer"  type="text" >
@@ -29,7 +43,7 @@
           <input id="model" formControlName="model" type="text" >
 
           <label for="year">Год</label>
-          <input id="year" formControlName="year" type="text" >
+          <input id="year" formControlName="year" type="text" required pattern="[0-9]{4}">
 
           <button class="btn btn-danger" (click)="removeCar(i)">
             <fa-icon style="color: #fff; font-size: 25px;" [icon]="faTrashAlt"></fa-icon>
@@ -37,9 +51,8 @@
         </div>
       </div>
     </div>
+
     <div>
-
-
       <button (click)="addCar()" class="btn btn-primary my-4 mx-2" type="button">
         <fa-icon [icon]="faPlus"></fa-icon>Добавить автомобиль
       </button>
@@ -50,8 +63,8 @@
     </div>
 
     <div>
-        <button type="button" (click)="goBack()" class="btn btn-secondary mx-2" >
-          <fa-icon [icon]="faArrowCircleLeft"></fa-icon>Назад
-        </button>
+      <button type="button" (click)="goBack()" class="btn btn-secondary mx-2" >
+        <fa-icon [icon]="faArrowCircleLeft"></fa-icon>Назад
+      </button>
     </div>
   </form>

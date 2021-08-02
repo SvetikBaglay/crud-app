@@ -39,18 +39,18 @@ export class OwnerComponent implements OnInit {
 
   newCarGroup(car?: CarEntity) {
     if (car) {
-      return this.fb.group({ number: car.number, manufacturer: car.manufacturer, model: car.model, year: car.year });
+    return this.fb.group({ number: car.number, manufacturer: car.manufacturer, model: car.model, year: car.year });
     }
 
     return this.fb.group({
-      // number: ['', Validators.required, Validators.pattern(/^([А-Я]{2}[0-9]{2} [А-Я]{2})$/)],
-      number: ['', Validators.required],
-      manufacturer: ['', Validators.required],
-      model: ['', Validators.required],
-      year: ['', Validators.required]
-      // year: ['', Validators.required, Validators.pattern(/^([0-9]{4})$/)]
-    });
-  }
+    // number: ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')],
+    number: [''],
+    manufacturer: ['', Validators.required],
+    model: ['', Validators.required],
+    // year: ['']
+    year: ['', Validators.required, Validators.pattern('^[0-9]{4}$')]
+      });
+    }
 
   get cars() {
     return this.ownerForm.get('cars') as FormArray;
@@ -81,13 +81,15 @@ export class OwnerComponent implements OnInit {
           middleName: owner.middleName,
         }
       )
-
       owner.cars.forEach((car) => this.cars.push(this.newCarGroup(car)));
-
     });
   }
 
   ngOnInit() {
+    this.ownerForm = this.fb.group({
+      number: this.fb.control('', Validators.required)
+      // ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')]
+    })
     this.getOwnerByIdItem();
   }
 }
