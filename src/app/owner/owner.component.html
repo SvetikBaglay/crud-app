@@ -20,30 +20,56 @@
       <div *ngFor="let car of cars.controls; let i=index">
         <div [formGroupName]="i">
           <label for="number">Номер</label>
+          <input id="number" formControlName="number" class="form-control" type="text">
 
-          <input id="number" formControlName="number" type="text" class="form-control" [class.is-invalid]="car.get('number')?.invalid" requared >
+          <div *ngIf="number(i)?.invalid && (number(i)?.dirty || number(i)?.touched)" class="alert alert-danger">
 
-          <!-- <div *ngIf="ownerForm.controls['number'].invalid && (ownerForm.controls['number'].dirty || ownerForm.controls['number'].touched)" class="alert alert-danger">
-              Номер обязателень к заполнению.
-
-            <div *ngIf="ownerForm.controls['number'].errors?.requared">
-              Номер обязателень к заполнению.
+            <div *ngIf="number(i)?.errors?.required">
+              Номер обязателен к заполнению.
             </div>
 
-            <div *ngIf="ownerForm.controls['number'].errors?.pattern">
+            <div *ngIf="number(i)?.errors?.pattern">
               Номер должен состоять из 2-х букв 4-х цифр и 2-х букв.
             </div>
 
-          </div> -->
+          </div>
 
           <label for="manufacturer">Марка</label>
           <input id="manufacturer" formControlName="manufacturer"  type="text" >
 
+          <div *ngIf="manufacturer(i)?.invalid && (manufacturer(i)?.dirty || manufacturer(i)?.touched)" class="alert alert-danger">
+
+            <div *ngIf="manufacturer(i)?.errors?.required">
+              Марка автомобиля обязателена к заполнению.
+            </div>
+
+          </div>
+
+
           <label for="model">Модель</label>
           <input id="model" formControlName="model" type="text" >
 
+          <div *ngIf="model(i)?.invalid && (model(i)?.dirty || model(i)?.touched)" class="alert alert-danger">
+
+            <div *ngIf="model(i)?.errors?.required">
+              Модель автомобиля обязательна к заполнению.
+            </div>
+
+          </div>
+
           <label for="year">Год</label>
           <input id="year" formControlName="year" type="text" required pattern="[0-9]{4}">
+
+          <div *ngIf="year(i)?.invalid && (year(i)?.dirty || year(i)?.touched)" class="alert alert-danger">
+
+            <div *ngIf="year(i)?.errors?.required">
+              Год выпуска автомобиля обязательна к заполнению.
+            </div>
+            <div *ngIf="year(i)?.errors?.pattern">
+              Год выпуска должен состоять из 4-х цифр.
+            </div>
+
+          </div>
 
           <button class="btn btn-danger" (click)="removeCar(i)">
             <fa-icon style="color: #fff; font-size: 25px;" [icon]="faTrashAlt"></fa-icon>

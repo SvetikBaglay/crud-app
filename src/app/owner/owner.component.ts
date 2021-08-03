@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICarOwnersService } from '../icarowners.service';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { faArrowCircleLeft,faSave, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Validators } from '@angular/forms';
 import { CarEntity } from '../owner';
@@ -15,9 +15,9 @@ import { CarEntity } from '../owner';
 export class OwnerComponent implements OnInit {
   ownerForm = this.fb.group({
     id: [''],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    middleName: ['', Validators.required],
+    firstName: [''],
+    lastName: [''],
+    middleName: [''],
     cars: this.fb.array([])
   });
 
@@ -43,14 +43,28 @@ export class OwnerComponent implements OnInit {
     }
 
     return this.fb.group({
-    // number: ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')],
-    number: [''],
-    manufacturer: ['', Validators.required],
-    model: ['', Validators.required],
-    // year: ['']
-    year: ['', Validators.required, Validators.pattern('^[0-9]{4}$')]
+      number: ['', [Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{4}[A-Z]{2}$')]],
+      manufacturer: ['', Validators.required],
+      model: ['', Validators.required],
+      year: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]]
       });
     }
+
+  number(index: number) {
+    return this.cars.controls[index].get('number');
+  }
+
+  manufacturer(index: number) {
+    return this.cars.controls[index].get('manufacturer');
+  }
+
+  model(index: number) {
+    return this.cars.controls[index].get('model');
+  }
+
+  year(index: number) {
+    return this.cars.controls[index].get('year');
+  }
 
   get cars() {
     return this.ownerForm.get('cars') as FormArray;
@@ -85,11 +99,8 @@ export class OwnerComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.ownerForm = this.fb.group({
-      number: this.fb.control('', Validators.required)
-      // ['', Validators.required, Validators.pattern('^[A-Z]{2}[0-9]{2}[A-Z]{2}$')]
-    })
+  ngOnInit(): void {
     this.getOwnerByIdItem();
   }
 }
+
