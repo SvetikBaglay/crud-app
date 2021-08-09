@@ -85,8 +85,6 @@ export class OwnerComponent implements OnInit {
   getOwnerByIdItem(): void {
     const id = +this.route.snapshot.params.id;
     this.icarOwnersService.getOwnerById(id).subscribe((owner) => {
-      console.log('owner: ', owner);
-
       this.ownerForm.patchValue(
         {
           id: owner.id,

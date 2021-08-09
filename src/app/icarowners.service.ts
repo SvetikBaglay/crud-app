@@ -32,6 +32,11 @@ export class ICarOwnersService {
     return this.http.put(url, ownerParams);
   }
 
+  deleteOwnerById(id: number): Observable<OwnerEntity> {
+    const url = `${this.ownersUrl}/${id}`;
+    return this.http.delete<OwnerEntity>(url);
+  }
+
 }
 
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICarOwnersService } from '../icarowners.service';
@@ -11,19 +12,28 @@ import { CarEntity, OwnerEntity } from '../owner';
 })
 export class OwnersComponent implements OnInit {
   owners: OwnerEntity[] = [];
-  selectedId: number | null = null;
+  selectedId: number;
+
 
   constructor(
     private icarOwnersService: ICarOwnersService,
-    private router: Router) { }
+    private router: Router,
+    private http: HttpClient) { }
 
   disabled: boolean = false;
 
-  changeEvent(ownerId: number) {
-    this.selectedId = ownerId;
+  changeEvent(id: number) {
+    this.selectedId = id;
   }
-   ngOnInit(): void  {
-     this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
+
+  deleteOwner(ownerId: number) {
+    //this.owners = this.owners.filter(ow => ow !== owner);
+    // console.log('id: ', this.deleteOwner);
+   this.icarOwnersService.deleteOwnerById(ownerId).subscribe();
+  }
+
+  ngOnInit(): void  {
+    this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
   }
 }
 
