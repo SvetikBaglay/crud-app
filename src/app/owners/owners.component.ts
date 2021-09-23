@@ -26,15 +26,18 @@ export class OwnersComponent implements OnInit {
     this.selectedId = id;
   }
 
-  deleteOwner(ownerId: number) {
-    //this.owners = this.owners.filter(ow => ow !== owner);
-    // console.log('id: ', this.deleteOwner);
-   this.icarOwnersService.deleteOwnerById(ownerId).subscribe();
+  deleteOwner(selectedId: number) {
+    let ownersWithoutDeleteOwner = [];
+    for (let i = 0; i < this.owners.length; i++) {
+      if (this.owners[i].id != selectedId ) {
+        ownersWithoutDeleteOwner.push(this.owners[i])
+      }
+    }
+    this.owners = ownersWithoutDeleteOwner
+   this.icarOwnersService.deleteOwnerById(selectedId).subscribe();
   }
 
   ngOnInit(): void  {
     this.icarOwnersService.getOwners().subscribe(owners => this.owners = owners);
   }
 }
-
-

@@ -24,7 +24,7 @@ export class ICarOwnersService {
   }
 
   addOwner(ownerEntity: OwnerEntity): Observable<OwnerEntity> {
-    return this.http.post<OwnerEntity>(this.ownersUrl, OwnerEntity);
+    return this.http.post<OwnerEntity>(this.ownersUrl, ownerEntity);
   }
 
   editOwner(ownerParams: { id: number, lastName: string, firstName: string, middleName: string, cars: CarEntity[] }): Observable<Object> {
