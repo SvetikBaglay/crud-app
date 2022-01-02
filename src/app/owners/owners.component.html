@@ -2,9 +2,29 @@
   <h2>Владельци автомобилей</h2>
   <div class="buttons">
     <button type="button" class="btn btn-secondary mr-5">Добавить</button>
-    <button type="button" [disabled]="!selectedId" class="btn btn-secondary mx-1">Просмотр</button>
-    <button type="button" [routerLink]="['/owners', selectedId]" [disabled]="!selectedId" class="btn btn-secondary mx-1">Редактировать</button>
-    <button type="button" (click)="deleteOwner(selectedId)"[disabled]="!selectedId" class="btn btn-secondary mx-1">Удалить</button>
+    <button
+      type="button"
+      [disabled]="!selectedId"
+      class="btn btn-secondary mx-1"
+    >
+      Просмотр
+    </button>
+    <button
+      type="button"
+      [routerLink]="['/owners', selectedId]"
+      [disabled]="!selectedId"
+      class="btn btn-secondary mx-1"
+    >
+      Редактировать
+    </button>
+    <button
+      type="button"
+      (click)="deleteOwner(selectedId)"
+      [disabled]="!selectedId"
+      class="btn btn-secondary mx-1"
+    >
+      Удалить
+    </button>
   </div>
   <div class="table-responsive">
     <table class="table table-bordered table-hover" *ngIf="owners">
@@ -18,15 +38,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let owner of owners" (click)="changeEvent(owner.id)">
-          <td >
-            <a [routerLink]="['/owners', owner.id]">{{owner.lastName}}</a>
+          <td>
+            <a [routerLink]="['/owners', owner.id]">{{ owner.lastName }}</a>
           </td>
-          <td>{{owner.firstName}}</td>
-          <td>{{owner.middleName}}</td>
-          <td>{{owner.cars.length}}</td>
+          <td>{{ owner.firstName }}</td>
+          <td>{{ owner.middleName }}</td>
+          <td>{{ owner.cars.length }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
